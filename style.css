@@ -1,0 +1,518 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #0f172a;
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #94a3b8;
+    font-size: 18px;
+}
+
+/* ─── APP LAYOUT CONTAINER ─── */
+.app-container {
+    display: grid;
+    grid-template-columns: 260px 1fr; /* Layout sidebar next to core views */
+    min-height: 100vh;
+}
+
+.main-content {
+    background-color: #f8fafc;
+    width: 100%;
+}
+
+/* ─── STICKY LEFT SIDEBAR ─── */
+.sidebar {
+    background-color: #0f172a; /* Matches dark hero accents */
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #1e293b;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.sidebar-brand {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 35px;
+    letter-spacing: -0.5px;
+    color: #f8fafc;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #94a3b8;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    background-color: #1e293b;
+    color: white;
+}
+
+.menu-item.active {
+    background-color: #38bdf8; /* Highlight current tab with slate blue/sky icon accent */
+    color: #0f172a;
+}
+
+.menu-item.active .menu-icon {
+    filter: none;
+}
+
+.menu-icon {
+    font-size: 16px;
+}
+
+/* ─── MOBILE RESPONSIVENESS ADJUSTMENT ─── */
+@media (max-width: 768px) {
+    .app-container {
+        grid-template-columns: 1fr; /* Drop side columns down on smaller mobile views */
+    }
+    
+    .sidebar {
+        position: relative;
+        height: auto;
+        padding: 15px 20px;
+        border-right: none;
+        border-bottom: 1px solid #1e293b;
+    }
+    
+    .sidebar-brand {
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .sidebar-menu {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 0;
+    }
+    
+    .menu-item {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+/* Course Grid */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    padding-bottom: 60px;
+}
+
+/* Course Cards */
+.course-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.course-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.course-card p {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Pushes button to bottom */
+}
+
+.enroll-btn {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.course-card:hover .enroll-btn {
+    background-color: #0f172a;
+    color: white;
+}
+
+/* Modal / Popup Form */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    width: 95%;
+    max-width: 400px;         /* Made it slightly narrower (was 450px) */
+    padding: 20px;             /* Reduced padding inside the modal (was 30px) */
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.close-btn:hover {
+    color: #0f172a;
+}
+
+/* Form Styles */
+.form-header {
+    text-align: center;
+    margin-bottom: 12px;       /* Reduced gap below header */
+}
+
+.form-header h2 { 
+    font-size: 18px;           /* Slightly smaller heading */
+} 
+
+.form-header p { 
+    font-size: 12px; 
+    color: #64748b; 
+}
+
+.input-group {
+    margin-bottom: 10px;       /* Reduced spacing between fields (was 15px) */
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 12px;           /* Slightly smaller labels */
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.input-group input, 
+.input-group select, 
+.input-group textarea {
+    padding: 8px 10px;         /* Tighter padding inside boxes (was 10px) */
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13px;           /* Adjusted font size for compact layout */
+    background: #f8fafc;
+}
+
+.input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+    outline: none;
+    border-color: #0f172a;
+    background: white;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #0f172a;
+    color: white;
+    padding: 10px;             /* Made button slightly slimmer */
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.submit-btn:hover { background-color: #1e293b; }
+
+#successMessage {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #d1fae5;
+    color: #065f46;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* --- Extra Auth & Dashboard Additions --- */
+
+.auth-box {
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.auth-redirect {
+    margin-top: 20px;
+    font-size: 13px;
+    text-align: center;
+    color: #64748b;
+}
+
+.auth-redirect a {
+    color: #0f172a;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-redirect a:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard Structures */
+.dashboard-body {
+    background-color: #f1f5f9;
+    display: block;
+    min-height: 100vh;
+}
+
+.dash-nav {
+    background: #0f172a;
+    color: white;
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.dash-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid #475569;
+    color: #cbd5e1;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.logout-btn:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: white;
+}
+
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .dashboard-layout { grid-template-columns: 1fr; }
+}
+
+.profile-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    height: fit-content;
+}
+
+.avatar {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.profile-card hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+}
+
+.stats {
+    text-align: left;
+    font-size: 14px;
+    color: #334155;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dashboard-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 25px;
+}
+
+.dashboard-section h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-left: 4px solid #0f172a;
+    padding-left: 10px;
+}
+
+.no-courses {
+    color: #64748b;
+    font-size: 14px;
+    grid-column: 1 / -1;
+    padding: 20px 0;
+}
+
+.no-courses a {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+.static-card {
+    cursor: default !important;
+}
+.static-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.goal-section p {
+    font-style: italic;
+    color: #475569;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #cbd5e1;
+}
+/* Centering layout for the login page */
+.login-page-body {
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    align-items: center;      /* Centers vertically */
+    min-height: 100vh;        /* Takes up the full height of the screen */
+    margin: 0;
+    background-color: #f8fafc; /* Gives a clean, soft background color */
+    font-family: sans-serif;
+}
+
+/* Controls the width and spacing of the card container */
+.login-container {
+    width: 100%;
+    max-width: 420px;         /* Prevents the form from becoming too wide */
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 
+                0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+/* Add this at the very bottom of style.css */
+.hidden {
+    display: none !important;
+}
+/* ─── BACK BUTTON STYLES ─── */
+.back-actions-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 20px 0 20px; /* Aligns perfectly with main container grids */
+}
+
+.back-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.back-link-btn:hover {
+    color: #0f172a;
+    background-color: #e2e8f0; /* Soft hover indicator pill */
+}
