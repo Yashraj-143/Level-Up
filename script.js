@@ -1,3 +1,20 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBrZt1VQZBGuJxjicaf1wf6gYDxMgV8QZc",
+  authDomain: "level-up-4d81f.firebaseapp.com",
+  projectId: "level-up-4d81f",
+  storageBucket: "level-up-4d81f.firebasestorage.app",
+  messagingSenderId: "1081711086792",
+  appId: "1:1081711086792:web:5cc2a5f2d8b17d58bce9fd",
+  measurementId: "G-PQGSMLSWY6"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider(); 
+
 document.addEventListener("DOMContentLoaded", () => {
     const courseCards = document.querySelectorAll(".course-card");
     const modal = document.getElementById("formModal");
@@ -7,131 +24,117 @@ document.addEventListener("DOMContentLoaded", () => {
     const successMessage = document.getElementById("successMessage");
     const submitBtn = document.querySelector(".submit-btn");
 
-    // 1. Open modal when a course card is clicked
+    // 1. Open modal on card click
     courseCards.forEach(card => {
         card.addEventListener("click", () => {
-            // Get the course ID from the data attribute
             const courseId = card.getAttribute("data-course");
             
-            // Auto-select that course in the dropdown
-            courseSelect.value = courseId;
-            
-            // Reset form visibility in case it was previously submitted
-            form.style.display = "block";
-            successMessage.classList.add("hidden");
+            // Reset form UI rules
             form.reset();
-            courseSelect.value = courseId; // Re-apply after reset
-
-            // Show the modal
+            form.style.display = "block"; 
+            successMessage.classList.add("hidden");
+            
+            // Sync dropdown value
+            if (courseSelect) {
+                courseSelect.value = courseId; 
+            }
+            
+            // Make layout visible
             modal.classList.remove("hidden");
+            modal.style.display = "flex"; 
         });
     });
 
-    // 2. Close modal when 'X' is clicked
-    closeBtn.addEventListener("click", () => {
-        modal.classList.add("hidden");
-    });
+    // 2. Close modal triggers
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            modal.classList.add("hidden");
+            modal.style.display = "none";
+        });
+    }
 
-    // 3. Close modal if user clicks outside the white form box
     window.addEventListener("click", (e) => {
         if (e.target === modal) {
             modal.classList.add("hidden");
+            modal.style.display = "none";
         }
     });
 
+    // Helper to send data over to your Google Sheets Apps Script
+    async function sendToGoogleSheets(fullName, email, course, level, goal) {
+        const formData = new FormData();
+        formData.append("fullName", fullName);
+        formData.append("email", email);
+        formData.append("course", course);
+        formData.append("level", level);
+        formData.append("goal", goal);
 
-// 4. Handle Form Submission
-form.addEventListener("submit", async (e) => {
-
-    e.preventDefault();
-
-    const originalBtnText = submitBtn.innerText;
-    submitBtn.innerText = "Processing...";
-    submitBtn.disabled = true;
-
-    const formData = new FormData();
-
-    formData.append(
-        "fullName",
-        document.getElementById("fullName").value
-    );
-
-    formData.append(
-        "email",
-        document.getElementById("email").value
-    );
-
-    formData.append(
-        "course",
-        document.getElementById("course").value
-    );
-
-    formData.append(
-        "level",
-        document.getElementById("level").value
-    );
-
-    formData.append(
-        "goal",
-        document.getElementById("goal").value
-    );
-
-    try {
-
-        await fetch(
-            "https://script.google.com/macros/s/AKfycbzBr5AtNxhjbTMMzLJIUcCKFSSCp_dciJbSzxhl-WWwlafd0tWTkmx4FrLeLHFSYTg/exec",
-            {
-                method: "POST",
-                body: formData,
-                mode: "no-cors"
-            }
-        );
-
-        form.style.display = "none";
-        successMessage.classList.remove("hidden");
-
-        form.reset();
-
-        setTimeout(() => {
-            modal.classList.add("hidden");
-
-            form.style.display = "block";
-            successMessage.classList.add("hidden");
-        }, 3000);
-
-    } catch (error) {
-
-        console.error("Submission Error:", error);
-
-        alert(
-            "Something went wrong. Please try again."
-        );
-
+        try {
+            await fetch(
+                "https://script.google.com/macros/s/AKfycbzBr5AtNxhjbTMMzLJIUcCKFSSCp_dciJbSzxhl-WWwlafd0tWTkmx4FrLeLHFSYTg/exec",
+                { method: "POST", body: formData, mode: "no-cors" }
+            );
+        } catch (err) {
+            console.error("Sheets sync failed:", err);
+        }
     }
 
-    submitBtn.innerText = originalBtnText;
-    submitBtn.disabled = false;
-});
+    // 3. Handle Email/Password Form Submission
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const fullName = document.getElementById("fullName").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value; 
+        const course = courseSelect.value;
+        const level = document.getElementById("level").value;
+        const goal = document.getElementById("goal").value;
 
-        // UI Feedback
-        const originalBtnText = submitBtn.innerText;
         submitBtn.innerText = "Processing...";
         submitBtn.disabled = true;
 
-        // Simulate API call
-        setTimeout(() => {
-            // Hide form and show success message inside the modal
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            
+            const sessionUser = { name: fullName, email: email, enrolledCourses: [course], level: level, goal: goal };
+            localStorage.setItem("currentUser", JSON.stringify(sessionUser));
+
+            await sendToGoogleSheets(fullName, email, course, level, goal);
+
             form.style.display = "none";
             successMessage.classList.remove("hidden");
-            
-            // Reset button
-            submitBtn.innerText = originalBtnText;
+            setTimeout(() => { window.location.href = "dashboard.html"; }, 2000);
+        } catch (error) {
+            alert("Error: " + error.message);
+        } finally {
+            submitBtn.innerText = "Subscribe Now";
             submitBtn.disabled = false;
-            
-            // Optional: Auto-close modal after 3 seconds
-            setTimeout(() => {
-                modal.classList.add("hidden");
-            }, 3000);
-
-        }, 800); 
+        }
     });
+
+    // 4. Handle Google Quick Enrollment inside Modal
+    const googleBtn = document.getElementById("googleSignUpBtn");
+    if (googleBtn) {
+        googleBtn.addEventListener("click", async () => {
+            const course = courseSelect.value;
+            const level = document.getElementById("level").value || "Not specified";
+            const goal = document.getElementById("goal").value || "Enrolled quickly via Google authentication";
+
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+
+                const sessionUser = { name: user.displayName, email: user.email, enrolledCourses: [course], level: level, goal: goal };
+                localStorage.setItem("currentUser", JSON.stringify(sessionUser));
+
+                await sendToGoogleSheets(user.displayName, user.email, course, level, goal);
+
+                form.style.display = "none";
+                successMessage.classList.remove("hidden");
+                setTimeout(() => { window.location.href = "dashboard.html"; }, 2000);
+            } catch (error) {
+                console.error("Google Enrollment Error:", error);
+                alert("Google Sign-In Failed: " + error.message);
+            }
+        });
+    }
+});
