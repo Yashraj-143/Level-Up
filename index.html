@@ -8,87 +8,94 @@
 </head>
 <body>
 
-    <!-- Header / Hero Section -->
-    <header class="hero">
-        <div class="container">
-            <h1>Level Up</h1>
-            <p>Choose a learning path below to start your journey.</p>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-brand">Level Up 🚀</div>
+            <nav class="sidebar-menu">
+                <a href="index.html" class="menu-item active">
+                    <span class="menu-icon">📚</span> All Courses
+                </a>
+                <a href="dashboard.html" class="menu-item">
+                    <span class="menu-icon">📊</span> Dashboard
+                </a>
+                <a href="login.html" class="menu-item">
+                    <span class="menu-icon">🔐</span> Account Login
+                </a>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            <header class="hero">
+                <div class="container">
+                    <h1>Level Up</h1>
+                    <p>Choose a learning path below to start your journey.</p>
+                </div>
+            </header>
+
+            <main class="container">
+                <div class="course-grid">
+                    
+                    <div class="course-card" data-course="cpp_dsa">
+                        <div class="card-icon">💻</div>
+                        <h3>C++ Data Structures</h3>
+                        <p>Master algorithms, memory management, and competitive programming basics.</p>
+                        <button class="enroll-btn">Select Course</button>
+                    </div>
+
+                    <div class="course-card" data-course="mern_stack">
+                        <div class="card-icon">🌐</div>
+                        <h3>Full-Stack MERN</h3>
+                        <p>Build scalable web apps from scratch using MongoDB, Express, React, and Node.</p>
+                        <button class="enroll-btn">Select Course</button>
+                    </div>
+
+                    <div class="course-card" data-course="python_ai">
+                        <div class="card-icon">🤖</div>
+                        <h3>Python & AI Tools</h3>
+                        <p>Learn Python scripting, data manipulation, and integrate AI APIs.</p>
+                        <button class="enroll-btn">Select Course</button>
+                    </div>
+
+                    <div class="course-card" data-course="iot_systems">
+                        <div class="card-icon">⚙️</div>
+                        <h3>IoT & Microcontrollers</h3>
+                        <p>Get hands-on with sensors, Arduino, and building connected devices.</p>
+                        <button class="enroll-btn">Select Course</button>
+                    </div>
+
+                    <div class="course-card" data-course="data_science">
+                        <div class="card-icon">📊</div>
+                        <h3>Data Science Fundamentals</h3>
+                        <p>Learn the core concepts of data analysis, visualization, and machine learning.</p>
+                        <button class="enroll-btn">Select Course</button>
+                    </div>
+
+                    <div class="course-card" data-course="cyber_security">
+                        <div class="card-icon">🔒</div>
+                        <h3>Cybersecurity Basics</h3>
+                        <p>Understand the fundamentals of cybersecurity, ethical hacking, and defense strategies.</p>
+                        <button class="enroll-btn">Select Course</button>
+                    </div>
+
+                    <div class="course-card" data-course="mobile_dev">
+                        <div class="card-icon">📱</div>
+                        <h3>Mobile App Development</h3>
+                        <p>Learn to create mobile applications using React Native and Flutter.</p>
+                        <button class="enroll-btn">Select Course</button>
+                    </div>
+
+                    <div class="course-card" data-course="cloud_computing">
+                        <div class="card-icon">☁️</div>
+                        <h3>Cloud Computing Essentials</h3>
+                        <p>Get introduced to cloud platforms, services, and deployment strategies.</p>
+                        <button class="enroll-btn">Select Course</button>
+                    </div>
+
+                </div>
+            </main>
         </div>
-    </header>
+    </div>
 
-    <!-- Course Grid Section -->
-    <main class="container">
-        <div class="course-grid">
-            
-            <!-- Course Card 1 -->
-            <div class="course-card" data-course="cpp_dsa">
-                <div class="card-icon">💻</div>
-                <h3>C++ Data Structures</h3>
-                <p>Master algorithms, memory management, and competitive programming basics.</p>
-                <button class="enroll-btn">Select Course</button>
-            </div>
-
-            <!-- Course Card 2 -->
-            <div class="course-card" data-course="mern_stack">
-                <div class="card-icon">🌐</div>
-                <h3>Full-Stack MERN</h3>
-                <p>Build scalable web apps from scratch using MongoDB, Express, React, and Node.</p>
-                <button class="enroll-btn">Select Course</button>
-            </div>
-
-            <!-- Course Card 3 -->
-            <div class="course-card" data-course="python_ai">
-                <div class="card-icon">🤖</div>
-                <h3>Python & AI Tools</h3>
-                <p>Learn Python scripting, data manipulation, and integrate AI APIs.</p>
-                <button class="enroll-btn">Select Course</button>
-            </div>
-
-            <!-- Course Card 4 -->
-            <div class="course-card" data-course="iot_systems">
-                <div class="card-icon">⚙️</div>
-                <h3>IoT & Microcontrollers</h3>
-                <p>Get hands-on with sensors, Arduino, and building connected devices.</p>
-                <button class="enroll-btn">Select Course</button>
-            </div>
-
-            <!-- Course Card 5 -->
-            <div class="course-card" data-course="data_science">
-                <div class="card-icon">📊</div>
-                <h3>Data Science Fundamentals</h3>
-                <p>Learn the core concepts of data analysis, visualization, and machine learning.</p>
-                <button class="enroll-btn">Select Course</button>
-            </div>
-
-            <!-- Course Card 6 -->
-            <div class="course-card" data-course="cyber_security">
-                <div class="card-icon">🔒</div>
-                <h3>Cybersecurity Basics</h3>
-                <p>Understand the fundamentals of cybersecurity, ethical hacking, and defense strategies.</p>
-                <button class="enroll-btn">Select Course</button>
-            </div>
-
-            <!-- Course Card 7 -->
-            <div class="course-card" data-course="mobile_dev">
-                <div class="card-icon">📱</div>
-                <h3>Mobile App Development</h3>
-                <p>Learn to create mobile applications using React Native and Flutter.</p>
-                <button class="enroll-btn">Select Course</button>
-            </div>
-
-            <!-- Course Card 8 -->
-            <div class="course-card" data-course="cloud_computing">
-                <div class="card-icon">☁️</div>
-                <h3>Cloud Computing Essentials</h3>
-                <p>Get introduced to cloud platforms, services, and deployment strategies.</p>
-                <button class="enroll-btn">Select Course</button>
-            </div>
-
-
-        </div>
-    </main>
-
-    <!-- The Form Modal (Hidden by default) -->
     <div id="formModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -107,6 +114,11 @@
                 <div class="input-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="Email Address" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Create Password</label>
+                    <input type="password" id="password" name="password" placeholder="Minimum 6 characters" required>
                 </div>
 
                 <div class="input-group">
@@ -136,10 +148,14 @@
 
                 <div class="input-group">
                     <label for="goal">Learning Goal</label>
-                    <textarea id="goal" name="goal" rows="3" placeholder="What do you hope to build?" required></textarea>
+                    <textarea id="goal" name="goal" rows="2" placeholder="What do you hope to build?" required></textarea>
                 </div>
 
                 <button type="submit" class="submit-btn">Subscribe Now</button>
+                <div style="text-align: center; margin: 15px 0; color: #64748b; font-size: 14px;">OR</div>
+                <button type="button" id="googleSignUpBtn" class="google-btn" style="width: 100%; background: white; color: #334155; border: 1px solid #cbd5e1; padding: 10px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background 0.2s;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6U4pRN-hmnCKRp5bBpsxjHfbbutWDEgFRUo0YrTP2ag&s=10" alt="Google Logo" style="width: 20px; height: 20px; object-fit: contain;"> Enroll using Google
+                </button>
             </form>
 
             <div id="successMessage" class="hidden">
@@ -148,6 +164,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
