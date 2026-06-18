@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Course Academy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-brand">Level Up 🚀</div>
+            <nav class="sidebar-menu">
+                <a href="index.html" class="menu-item">
+                    <span class="menu-icon">📚</span> All Courses
+                </a>
+                <a href="dashboard.html" class="menu-item active">
+                    <span class="menu-icon">📊</span> Dashboard
+                </a>
+               
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            
+            <div class="back-actions-wrapper">
+                <a href="index.html" class="back-link-btn">
+                    <span>←</span> Back to Courses
+                </a>
+            </div>
+
+            <div class="dash-container">
+                <div class="dash-nav" style="background: transparent; color: #0f172a; padding: 20px 0; margin-bottom: 10px;">
+                    <div class="nav-flex">
+                        <div class="logo" style="font-size: 24px;">Your Learning Space</div>
+                        <button id="logoutBtn" class="logout-btn">Log Out</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-layout">
+                    <div class="dashboard-layout">
+    
+                        <aside class="profile-card">
+                            <div class="avatar">👨‍💻</div>
+                            <h3 id="userProfileName">Loading...</h3>
+                            <p id="userProfileEmail" style="color: #64748b; font-size: 14px; margin-top: 4px;">loading@email.com</p>
+                            <hr>
+                            <div class="stats">
+                                <div><strong>Account Status:</strong> Active</div>
+                                <div><strong>Skill Level:</strong> <span id="userLevel" style="text-transform: capitalize;">-</span></div>
+                            </div>
+                        </aside>
+
+                            <section>
+                                <div class="dashboard-section">
+                                    <h3>My Enrolled Courses</h3>
+                                        <div id="enrolledCoursesContainer" class="course-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); padding-bottom: 0;">
+                                            <p class="no-courses">Checking enrollments...</p>
+                                        </div>
+                                </div>
+
+                                <div class="dashboard-section goal-section">
+                                    <h3>My Learning Goal</h3>
+                                    <p id="userGoal">"Loading your objectives..."</p>
+                                </div>
+                            </section>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
